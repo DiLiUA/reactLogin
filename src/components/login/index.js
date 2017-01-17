@@ -2,6 +2,8 @@ import { connect } from 'react-redux';
 
 import { Form, Button, FormGroup, FormControl, Glyphicon } from 'react-bootstrap';
 
+import './style.scss';
+
 class AuthComponent extends React.Component {
   constructor(props) {
     super(...arguments);
@@ -34,7 +36,7 @@ class AuthComponent extends React.Component {
     return (
       <div id='auth_page'>
         {
-          this.props.auth.Auth !== 'Logged'
+          this.props.auth.Auth == 'Logged'
           ?
           <LoginForm
             {
@@ -100,8 +102,8 @@ const LoginForm = (props) => {
 
 const SuccessNotification = () => {
   return (
-    <div className="">
-      <Glyphicon glyph="ok" />
+    <div className="auth_success">
+      <Glyphicon glyph="ok"/>
       &nbsp;
       Successful logged</div>
   )
