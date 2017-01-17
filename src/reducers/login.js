@@ -1,3 +1,5 @@
+import ActionsEnum from '../enums/actions';
+
 export default (
   state = {
     auth: {
@@ -13,6 +15,11 @@ export default (
 ) => {
 
   switch (action.type) {
+
+    case  ActionsEnum.LOGIN.FORM.CHANGE: {
+      return state;
+    }
+
     default:
       return state;
   }
