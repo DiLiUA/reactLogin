@@ -6,9 +6,9 @@ export default (
       Auth: '',
       Language: ''
     },
-    dataForm: {
-      userLogin: '',
-      userPassword: ''
+    form: {
+      login: '',
+      password: ''
     }
   },
   action
