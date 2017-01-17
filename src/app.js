@@ -1,11 +1,13 @@
 import { Provider } from 'react-redux';
 
+import RootComponent from './components/root';
+
 import congigureStore from './store/configureStore';
 
 const render = () => {
   ReactDOM.render(
     <Provider store={congigureStore()}>
-      <div>test</div>
+      <RootComponent/>
     </Provider>,
     document.getElementById('app')
   );
