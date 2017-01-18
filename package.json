@@ -7,9 +7,11 @@
   "license": "ISC",
   "homepage": "",
   "scripts": {
-    "start": "cross-env NODE_ENV=development node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js"
+    "start": "cross-env NODE_ENV=development node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "server": "babel-node server.js"
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.7",
     "babel-plugin-add-module-exports": "^0.2.1",
@@ -18,10 +20,13 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.16.0",
+    "body-parser": "^1.15.2",
     "clean-webpack-plugin": "^0.1.14",
+    "cors": "^2.8.1",
     "cross-env": "^3.1.4",
     "css-loader": "^0.26.0",
     "del": "^2.2.2",
+    "express": "^4.14.0",
     "file-loader": "^0.9.0",
     "font-awesome": "^4.7.0",
     "html-webpack-plugin": "^2.24.1",
