@@ -1,0 +1,67 @@
+#auth_page {
+  padding: 24px;
+  box-sizing: border-box;
+  max-width: 234px;
+  margin: 0 auto;
+}
+
+.auth_success {
+  font-size: 16px;
+  display: flex;
+  align-items: flex-end;
+
+  .glyphicon-ok {
+    font-size: 30px;
+    color: $greenColor;
+  }
+}
+
+.auth_form {
+  font-size: 12px;
+
+  &__title {
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:before {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 37px;
+      background: blue;
+      margin-right: 10px;
+      background: url('assets/images/fire-icon.png');
+    }
+  }
+}
+
+.login_btn{
+  width: 90px;
+  height: 34px;
+  box-sizing: border-box;
+  border: 1px silid $grayColor;
+  border-radius: 17px;
+  box-shadow: none !important;
+  color: $blueColor;
+  display: block;
+  margin: 0 auto;
+  background: transparent;
+  padding: 3px 13px;
+  
+  &:hover {
+    color: $blueColor;
+  }
+
+  .fa-long-arrow-right {
+    margin-left: 6px;
+  }
+
+  .fa-cog {
+    font-size: 26px;
+  }
+}

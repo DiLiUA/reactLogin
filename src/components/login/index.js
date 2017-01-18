@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import { Form, Button, FormGroup, FormControl, Glyphicon } from 'react-bootstrap';
 
-import './style.scss';
+// import './_login.scss';
 
 class AuthComponent extends React.Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class AuthComponent extends React.Component {
     return (
       <div id='auth_page'>
         {
-          this.props.auth.Auth == 'Logged'
+          this.props.auth.Auth !== 'Logged'
           ?
           <LoginForm
             {
@@ -65,7 +65,7 @@ const LoginForm = (props) => {
     >
       <div className='auth_form__title'>Login</div>
 
-      <FormGroup>
+      <FormGroup className={props.auth.Auth !== 'Denied' ? 'has-error' : ''}>
         <FormControl
           type='text'
           defaultValue=''
@@ -92,8 +92,17 @@ const LoginForm = (props) => {
       <Button
         type='submit'
         className='login_btn'
+        disabled={!(props.form.login && props.form.password)}
       >
-        Login
+        { props.form.login && props.form.password ?
+          <span><i className="fa fa-cog fa-spin fa-3x fa-fw"></i></span>
+          :
+          <span>
+              Login
+
+              <i className="fa fa-long-arrow-right"></i>
+            </span>
+        }
       </Button>
 
     </Form>
