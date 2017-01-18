@@ -44,7 +44,7 @@
   width: 90px;
   height: 34px;
   box-sizing: border-box;
-  border: 1px silid $grayColor;
+  border: 1px solid $grayColor;
   border-radius: 17px;
   box-shadow: none !important;
   color: $blueColor;
@@ -53,8 +53,10 @@
   background: transparent;
   padding: 3px 13px;
   
-  &:hover {
+  &:hover, &:focus, &:active, &:visited {
     color: $blueColor;
+    border-color: $grayColor;
+    background: transparent;
   }
 
   .fa-long-arrow-right {

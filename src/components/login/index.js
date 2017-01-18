@@ -42,8 +42,7 @@ class AuthComponent extends React.Component {
       data: {
         login: loginVal,
         password: passVal
-      },
-      sending: true
+      }
     };
 
     this.props.dispatch(submitLoginForm(form));
