@@ -16,7 +16,11 @@ export const changeAuthField = (
   };
 };
 
-export const submitLoginForm = (
+export const submitLoginForm = (data = {}) => {
+
+};
+
+export const submitLoginForm133 = (
   form = {
     login: '',
     password: ''

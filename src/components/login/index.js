@@ -38,14 +38,13 @@ class AuthComponent extends React.Component {
     const loginVal = target.login_input.value.trim();
     const passVal = target.password_input.value.trim();
 
-    const form = {
-      data: {
-        login: loginVal,
-        password: passVal
-      }
+    const data = {
+      login: loginVal,
+      password: passVal
     };
 
-    this.props.dispatch(submitLoginForm(form));
+    submitLoginForm(data);
+
   }
 
   onChange(evt) {
