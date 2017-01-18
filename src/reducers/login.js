@@ -7,8 +7,11 @@ export default (
       Language: ''
     },
     form: {
-      login: '',
-      password: ''
+      data: {
+        login: '',
+        password: ''
+      },
+      sending: false
     }
   },
   action
@@ -17,7 +20,13 @@ export default (
   switch (action.type) {
 
     case  ActionsEnum.LOGIN.FORM.CHANGE: {
-      return state;
+      const copyState = Object.assign({}, state, {form: Object.assign({}, state.form, action.form)});
+      return copyState;
+    }
+
+    case ActionsEnum.LOGIN.FORM.SUBMIT_AUTH: {
+      const copyState = Object.assign({}, state, {form: Object.assign({}, state.form, action.form)});
+      return copyState;
     }
 
     default:

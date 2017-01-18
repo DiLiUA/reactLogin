@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { changeAuthField, submitLoginForm } from '../../actions/login';
 
 import { Form, Button, FormGroup, FormControl, Glyphicon } from 'react-bootstrap';
 
@@ -12,25 +13,57 @@ class AuthComponent extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
 
-  onSubmit(evt) {
-    evt.preventDefault();
-    console.log('submit');
-  }
-
-  onChange(evt) {
-    console.log('change');
-  }
-
   static defaultProps = {
     auth: {
       Auth: '',
       Language: ''
     },
     form: {
-      login: '',
-      password: ''
+      data: {
+        login: '',
+        password: ''
+      },
+      sending: false
     }
   };
+
+  static propTypes ={
+    auth: React.PropTypes.object,
+    form: React.PropTypes.object,
+  };
+
+  onSubmit(evt) {
+    evt.preventDefault();
+    const target = evt.target || evt.srcElement;
+    const loginVal = target.login_input.value.trim();
+    const passVal = target.password_input.value.trim();
+
+    const form = {
+      data: {
+        login: loginVal,
+        password: passVal
+      },
+      sending: true
+    };
+
+    this.props.dispatch(submitLoginForm(form));
+  }
+
+  onChange(evt) {
+    const target = evt.target || evt.srcElement;
+    const formAuth = target.closest('form');
+    const loginVal = formAuth.login_input.value.trim();
+    const passVal = formAuth.password_input.value.trim();
+
+    const form = {
+      data: {
+        login: loginVal,
+        password: passVal
+      }
+    };
+
+    this.props.dispatch(changeAuthField(form));
+  }
 
   render () {
     return (
@@ -65,7 +98,7 @@ const LoginForm = (props) => {
     >
       <div className='auth_form__title'>Login</div>
 
-      <FormGroup className={props.auth.Auth !== 'Denied' ? 'has-error' : ''}>
+      <FormGroup className={props.auth.Auth === 'Denied' ? 'has-error' : ''}>
         <FormControl
           type='text'
           defaultValue=''
@@ -90,11 +123,11 @@ const LoginForm = (props) => {
       </FormGroup>
 
       <Button
-        type='submit'
+        type={!props.form.sending ? 'submit' : 'button'}
         className='login_btn'
-        disabled={!(props.form.login && props.form.password)}
+        disabled={!(props.form.data.login && props.form.data.password) && !props.form.sending}
       >
-        { props.form.login && props.form.password ?
+        { props.form.sending ?
           <span><i className="fa fa-cog fa-spin fa-3x fa-fw"></i></span>
           :
           <span>
