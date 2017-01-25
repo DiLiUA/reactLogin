@@ -2,7 +2,9 @@ export default class ActionsEnums {
   static LOGIN = {
     FORM: {
       CHANGE: 'LOGIN_FORM_CHANGE',
-      SUBMIT_AUTH: 'LOGIN_FORM_SUBMIT_AUTH'
+      START: 'LOGIN_FORM_START',
+      SUCCESS: 'LOGIN_FORM_SUCCESS',
+      ERROR: 'LOGIN_FORM_ERROR'
     }
   }
-}
+};

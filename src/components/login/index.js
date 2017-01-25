@@ -3,8 +3,6 @@ import { changeAuthField, submitLoginForm } from '../../actions/login';
 
 import { Form, Button, FormGroup, FormControl, Glyphicon } from 'react-bootstrap';
 
-// import './_login.scss';
-
 class AuthComponent extends React.Component {
   constructor(props) {
     super(...arguments);
@@ -44,7 +42,6 @@ class AuthComponent extends React.Component {
     };
 
     submitLoginForm(data);
-
   }
 
   onChange(evt) {
@@ -123,7 +120,7 @@ const LoginForm = (props) => {
       <Button
         type={!props.form.sending ? 'submit' : 'button'}
         className='login_btn'
-        disabled={!(props.form.data.login && props.form.data.password) && !props.form.sending}
+        //disabled={!(props.form.data.login && props.form.data.password) && !props.form.sending}
       >
         { props.form.sending ?
           <span><i className="fa fa-cog fa-spin fa-3x fa-fw"></i></span>

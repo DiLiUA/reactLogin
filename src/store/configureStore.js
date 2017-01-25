@@ -1,5 +1,6 @@
 import { createStore } from 'redux';
 import rootReducer from '../reducers';
+import StoreHelper from '../helpers/store';
 
 export default function congigureStore(initialState = {}) {
   const store = createStore(
@@ -7,6 +8,8 @@ export default function congigureStore(initialState = {}) {
     initialState,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );
+
+  StoreHelper.init(store); // save store in order to access it and make dispatch in any place we need
 
   if (module.hot) {
     module.hot.accept('../reducers', () => {
