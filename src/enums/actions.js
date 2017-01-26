@@ -1,4 +1,5 @@
 export default class ActionsEnums {
+
   static LOGIN = {
     FORM: {
       CHANGE: 'LOGIN_FORM_CHANGE',
@@ -7,4 +8,5 @@ export default class ActionsEnums {
       ERROR: 'LOGIN_FORM_ERROR'
     }
   }
+
 };

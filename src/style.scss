@@ -1,6 +1,15 @@
+$icon-font-path: 'bootstrap-sass/assets/fonts/bootstrap/';
+@import '~bootstrap-sass/assets/stylesheets/_bootstrap-sprockets.scss';
+@import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 @import '~font-awesome/css/font-awesome.css';
-@import 'assets/scss/_variables';
+
+@import './assets/scss/_variables';
 @import './components/login/login';
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url("~#{$icon-font-path}#{$icon-font-name}.ttf") format('truetype');
+}
 
 body {
   background: #fff;

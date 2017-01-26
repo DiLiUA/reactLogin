@@ -1,13 +1,11 @@
 {
-  "name": "webpack-react",
-  "version": "1.0.0",
-  "description": "name project",
-  "main": "./dist/build.js",
+  "name": "reactLogin",
+  "version": "0.0.1",
+  "description": "The solution for geeksteam React vacancy task",
   "author": "Dmitriy Litvinov",
   "license": "ISC",
-  "homepage": "",
   "scripts": {
-    "start": "cross-env NODE_ENV=development node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "server": "node ./node_modules/babel-cli/lib/babel-node server.js"
   },
   "devDependencies": {
@@ -23,7 +21,6 @@
     "body-parser": "^1.15.2",
     "clean-webpack-plugin": "^0.1.14",
     "cors": "^2.8.1",
-    "cross-env": "^3.1.4",
     "css-loader": "^0.26.0",
     "del": "^2.2.2",
     "express": "^4.14.0",

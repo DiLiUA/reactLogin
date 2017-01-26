@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
-
-import { changeAuthField, submitLoginForm } from '../../actions/login';
 import { Form, Button, FormGroup, FormControl, Glyphicon } from 'react-bootstrap';
 
-class AuthComponent extends React.Component {
+import { changeAuthField, submitLoginForm } from '../../actions/login';
+import StatusesEnum from '../../enums/statuses';
+
+class LoginComponent extends React.Component {
+
   constructor(props) {
     super(...arguments);
 
@@ -32,52 +34,28 @@ class AuthComponent extends React.Component {
 
   onSubmit(evt) {
     evt.preventDefault();
-    const target = evt.target || evt.srcElement;
-    const loginVal = target.login_input.value.trim();
-    const passVal = target.password_input.value.trim();
-
-    const data = {
-      login: loginVal,
-      password: passVal
-    };
-
-    submitLoginForm(data);
+    submitLoginForm(this.props.form.data);
   }
 
   onChange(evt) {
     const target = evt.target || evt.srcElement;
-    const formAuth = target.closest('form');
-    const loginVal = formAuth.login_input.value.trim();
-    const passVal = formAuth.password_input.value.trim();
-
-    const form = {
-      data: {
-        login: loginVal,
-        password: passVal
-      }
-    };
-
-    this.props.dispatch(changeAuthField(form));
+    this.props.dispatch(changeAuthField(target.name, target.value));
   }
 
   render () {
     return (
-      <div id='auth_page'>
+      <div id="auth_page">
         {
-          this.props.auth.Auth !== 'Logged'
-          ?
-          <LoginForm
-            {
-              ...Object.assign({}, this.props, {
-                onSubmit: this.onSubmit,
-                onChange: this.onChange
-              })
-            }
-          />
-          :
-          <SuccessNotification />
+          ['', StatusesEnum.DENIED].includes(this.props.auth.Auth) ?
+            <LoginForm
+              {
+                ...Object.assign({}, this.props, {
+                  onSubmit: this.onSubmit,
+                  onChange: this.onChange
+                })
+              }
+            /> : <SuccessNotification />
         }
-
       </div>
     );
   }
@@ -86,50 +64,47 @@ class AuthComponent extends React.Component {
 const LoginForm = (props) => {
   return (
     <Form
-      name='auth'
-      className='auth_form'
-      autoComplete='off'
+      name="auth"
+      className="auth_form"
+      autoComplete="off"
       onSubmit={props.onSubmit}
     >
-      <div className='auth_form__title'>Login</div>
+      <div className="auth_form__title">Login</div>
 
-      <FormGroup className={props.auth.Auth === 'Denied' ? 'has-error' : ''}>
+      <FormGroup className={props.auth.Auth === StatusesEnum.DENIED ? 'has-error' : ''}>
         <FormControl
-          type='text'
-          defaultValue=''
-          name='login'
-          id='login_input'
-          className='input_field'
-          placeholder='Login'
+          type="text"
+          defaultValue=""
+          name="login"
+          id="login_input"
+          className="input_field"
+          placeholder="Login"
           onChange={props.onChange}
         />
       </FormGroup>
 
-      <FormGroup className={props.auth.Auth === 'Denied' ? 'has-error' : ''}>
+      <FormGroup className={props.auth.Auth === StatusesEnum.DENIED ? 'has-error' : ''}>
         <FormControl
-          type='password'
-          defaultValue=''
-          name='login'
-          id='password_input'
-          className='input_field'
-          placeholder='Password'
+          type="password"
+          defaultValue=""
+          name="password"
+          id="password_input"
+          className="input_field"
+          placeholder="Password"
           onChange={props.onChange}
         />
       </FormGroup>
 
       <Button
-        type={!props.form.sending ? 'submit' : 'button'}
-        className='login_btn'
-        //disabled={!(props.form.data.login && props.form.data.password) && !props.form.sending}
+        type={props.form.sending ? 'button' : 'submit'}
+        className="login_btn"
+        disabled={props.form.sending}
       >
-        { props.form.sending ?
-          <span><i className='fa fa-cog fa-spin fa-3x fa-fw'></i></span>
-          :
-          <span>
-              Login
-
-              <i className='fa fa-long-arrow-right'></i>
-            </span>
+        {
+          props.form.sending ?
+            <span><i className="fa fa-cog fa-spin fa-3x fa-fw"></i></span>
+            :
+            <span>Login <i className="fa fa-long-arrow-right"></i></span>
         }
       </Button>
 
@@ -139,15 +114,11 @@ const LoginForm = (props) => {
 
 const SuccessNotification = () => {
   return (
-    <div className='auth_success'>
-      <Glyphicon glyph='ok'/>
-      &nbsp;
-      Successful logged</div>
+    <div className="auth_success">
+      <Glyphicon glyph="ok"/>&nbsp;Successful logged
+    </div>
   )
-}
-
-const mapStateProps = state => {
-  return {...state.login}
 };
 
-export default connect(mapStateProps)(AuthComponent);
+const mapStateProps = state => state.login;
+export default connect(mapStateProps)(LoginComponent);

@@ -1,6 +1,6 @@
 import ActionsEnum from '../enums/actions';
 
-const defaultState = {
+const initialState = {
   auth: {
     Auth: '',
     Language: ''
@@ -14,48 +14,40 @@ const defaultState = {
   }
 };
 
-export default (state = defaultState, action) => {
+export default (state = initialState, action) => {
 
   switch (action.type) {
 
     case  ActionsEnum.LOGIN.FORM.CHANGE: {
-      const copyState = Object.assign({},
-        state,
-        {
-          auth: Object.assign({}, state.auth, defaultState.auth),
-          form: Object.assign({}, state.form, action.form)
-        }
-      );
-      return copyState;
+      const data = Object.assign({}, state.form.data);
+      data[action.field] = action.value;
+
+      return Object.assign({}, state, {
+        form: Object.assign({}, state.form, { data }),
+        auth: Object.assign({}, initialState.auth)
+      });
     }
 
     case ActionsEnum.LOGIN.FORM.START: {
-      const copyState = Object.assign({},
-        state,
-        {
+      return Object.assign({}, state, {
           form: Object.assign({}, state.form, {sending: true})
         }
       );
-      return copyState;
     }
 
     case ActionsEnum.LOGIN.FORM.SUCCESS: {
-      const copyState = Object.assign({},
-        defaultState,
-        {
-          auth: Object.assign({}, defaultState.auth, action.data)
+      return Object.assign({}, initialState, {
+          auth: Object.assign({}, initialState.auth, action.data),
+          from: Object.assign({}, initialState.form) // reset form
         }
       );
-      return copyState;
     }
 
     case ActionsEnum.LOGIN.FORM.ERROR: {
-      const copyState = Object.assign({},
-        state,
-        {auth: Object.assign({}, state.auth, action.error)},
-        {form: Object.assign({}, state.form, {sending: false})},
+      return Object.assign({}, state,
+        { auth: Object.assign({}, state.auth, action.error) },
+        { form: Object.assign({}, state.form, {sending: false}) },
       );
-      return copyState;
     }
 
     default:

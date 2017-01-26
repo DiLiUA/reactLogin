@@ -1,4 +1,5 @@
 export default class RequestHelper {
+
   static _url = 'http://localhost:8080';
 
   static _checkStatus(response) {
@@ -27,5 +28,6 @@ export default class RequestHelper {
       .catch(error => {
         throw error;
       })
-  }
+  };
+
 };

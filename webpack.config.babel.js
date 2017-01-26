@@ -8,7 +8,6 @@ import WriteFilePlugin from 'write-file-webpack-plugin';
 
 del.sync(path.join(__dirname, '/', 'dist'));
 
-const NODE_ENV = process.env.NODE_ENV || 'development';
 const paths = {
   src: path.join(__dirname, 'src'),
   dist: path.join(__dirname, 'dist')
@@ -38,7 +37,7 @@ const config = {
     library: '[name]'
   },
 
-  devtool: NODE_ENV == 'development' ? 'source-map' : null,
+  devtool: 'source-map',
 
   plugins: [
     new	webpack.HotModuleReplacementPlugin(),
@@ -48,10 +47,6 @@ const config = {
       template: path.join(paths.src, 'index.html'),
       inject: true,
       filename: 'index.html'
-    }),
-    plugins.definePlugin({
-      _DEV_:  NODE_ENV === 'development',
-      _PROD_: NODE_ENV === 'production',
     }),
     plugins.commonsChunkPlugin({
       name: 'common',
@@ -127,17 +122,5 @@ const config = {
     }
   }
 };
-
-if (NODE_ENV === 'production') {
-  module.exports.plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        drop_console: true,
-        unsafe: true
-      }
-    })
-  );
-}
 
 export default config;
