@@ -19,17 +19,33 @@ export default (state = defaultState, action) => {
   switch (action.type) {
 
     case  ActionsEnum.LOGIN.FORM.CHANGE: {
-      const copyState = Object.assign({}, state, {form: Object.assign({}, state.form, action.form)});
+      const copyState = Object.assign({},
+        state,
+        {
+          auth: Object.assign({}, state.auth, defaultState.auth),
+          form: Object.assign({}, state.form, action.form)
+        }
+      );
       return copyState;
     }
 
     case ActionsEnum.LOGIN.FORM.START: {
-      const copyState = Object.assign({}, state, {form: Object.assign({}, state.form, {sending: true})});
+      const copyState = Object.assign({},
+        state,
+        {
+          form: Object.assign({}, state.form, {sending: true})
+        }
+      );
       return copyState;
     }
 
     case ActionsEnum.LOGIN.FORM.SUCCESS: {
-      const copyState = Object.assign({}, defaultState, {auth: Object.assign({}, defaultState.auth, action.data)});
+      const copyState = Object.assign({},
+        defaultState,
+        {
+          auth: Object.assign({}, defaultState.auth, action.data)
+        }
+      );
       return copyState;
     }
 
@@ -39,7 +55,6 @@ export default (state = defaultState, action) => {
         {auth: Object.assign({}, state.auth, action.error)},
         {form: Object.assign({}, state.form, {sending: false})},
       );
-      console.log(copyState.auth);
       return copyState;
     }
 

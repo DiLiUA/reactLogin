@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { changeAuthField, submitLoginForm } from '../../actions/login';
 
+import { changeAuthField, submitLoginForm } from '../../actions/login';
 import { Form, Button, FormGroup, FormControl, Glyphicon } from 'react-bootstrap';
 
 class AuthComponent extends React.Component {
@@ -105,7 +105,7 @@ const LoginForm = (props) => {
         />
       </FormGroup>
 
-      <FormGroup>
+      <FormGroup className={props.auth.Auth === 'Denied' ? 'has-error' : ''}>
         <FormControl
           type='password'
           defaultValue=''
@@ -123,12 +123,12 @@ const LoginForm = (props) => {
         //disabled={!(props.form.data.login && props.form.data.password) && !props.form.sending}
       >
         { props.form.sending ?
-          <span><i className="fa fa-cog fa-spin fa-3x fa-fw"></i></span>
+          <span><i className='fa fa-cog fa-spin fa-3x fa-fw'></i></span>
           :
           <span>
               Login
 
-              <i className="fa fa-long-arrow-right"></i>
+              <i className='fa fa-long-arrow-right'></i>
             </span>
         }
       </Button>
@@ -139,8 +139,8 @@ const LoginForm = (props) => {
 
 const SuccessNotification = () => {
   return (
-    <div className="auth_success">
-      <Glyphicon glyph="ok"/>
+    <div className='auth_success'>
+      <Glyphicon glyph='ok'/>
       &nbsp;
       Successful logged</div>
   )

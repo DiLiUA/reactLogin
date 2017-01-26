@@ -7,7 +7,7 @@ export const changeAuthField = (form = {
     login: '',
     password: ''
   },
-  sending: true
+  sending: false
 }) => {
 
   return {
@@ -22,12 +22,14 @@ export const submitLoginForm = (data = {}) => {
 
   RequestHelper._post('/login', data)
     .then(data => {
-      console.log('login was successful', data);
-      StoreHelper.dispatch(login.success(data));
+      setTimeout(function () { //Settimeout only for test visible loading btn. You can delete it If you want
+        StoreHelper.dispatch(login.success(data)); // login was successful
+      }, 500);
     })
     .catch(error => {
-      console.log('login was failed', error);
-      StoreHelper.dispatch(login.error(error));
+      setTimeout(function () { // Settimeout only for test visible loading btn. You can delete it If you want
+        StoreHelper.dispatch(login.error(error)); //login was failed
+      }, 500);
     })
 };
 

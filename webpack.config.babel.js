@@ -3,7 +3,6 @@
 import webpack from 'webpack';
 import path from 'path';
 import del from 'del';
-import CleanWebpackPlugin from 'clean-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WriteFilePlugin from 'write-file-webpack-plugin';
 
@@ -38,11 +37,6 @@ const config = {
     filename: '[name].[hash].js',
     library: '[name]'
   },
-
-  // watch: true,
-  // watchOptions: {
-  //   aggregateTimeout: 100
-  // },
 
   devtool: NODE_ENV == 'development' ? 'source-map' : null,
 
@@ -134,7 +128,6 @@ const config = {
   }
 };
 
-
 if (NODE_ENV === 'production') {
   module.exports.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
@@ -145,14 +138,6 @@ if (NODE_ENV === 'production') {
       }
     })
   );
-
-  // module.exports.plugins.push(
-  //   new CleanWebpackPlugin([[path.join(__dirname, '/dist/js')]], {
-  //     root: __dirname,
-  //     verbose: true,
-  //     dry: false
-  //   })
-  // );
 }
 
 export default config;
